@@ -52,7 +52,7 @@ public class PersonalDataPDFService {
         var age = Period.between(personalInfo.getBirthDate(), LocalDate.now()).getYears();
         addInfo(contentStream, Color.BLACK, 12, X_CONST, 630, String.format("Age: %s y.o (%s)", age, personalInfo.getBirthDate()));
         addInfo(contentStream, Color.BLACK, 12, X_CONST, 615, String.format("Experience: %s years", personalInfo.getExperience()));
-        addInfo(contentStream, Color.BLACK, 12, X_CONST, 600, String.format("Salary: %s noodle per/month", personalInfo.getSalary()));
+        addInfo(contentStream, Color.BLACK, 12, X_CONST, 600, String.format("Salary: %s USD", personalInfo.getSalary()));
         //Add contact information:
         addInfo(contentStream, Color.BLACK, 16, X_CONST, 580, CONTACT_INFO);
         addContacts(document, contentStream, 560, personalInfo.getPhoneNumber(), new File(
@@ -149,7 +149,7 @@ public class PersonalDataPDFService {
             addInfo(contentStream, Color.BLACK, 12, 30, paddingLocal, universityData.getStartDate().toString());
             addInfo(contentStream, Color.BLACK, 12, 100, paddingLocal, universityData.getUniversityName());
             addInfo(contentStream, Color.BLACK, 12, 400, paddingLocal, universityData.getEndDate().toString());
-            addInfo(contentStream, Color.BLACK, 12, 490, paddingLocal, "Kage");
+            addInfo(contentStream, Color.BLACK, 12, 490, paddingLocal, universityData.getLevel().description);
             paddingLocal -= 15;
         }
 
