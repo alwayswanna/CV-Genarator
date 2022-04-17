@@ -6,8 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @ToString
@@ -15,10 +13,10 @@ public class EducationInfoModel {
 
     @JsonProperty("start")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate startDate;
+    private String startDate;
     @JsonProperty("end")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate endDate;
+    private String endDate;
     @JsonProperty("name-of-university")
     private String universityName;
     @JsonProperty("level")

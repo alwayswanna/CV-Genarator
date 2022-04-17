@@ -1,0 +1,3 @@
+enum EducationLevel{
+  MAGISTRACY, BACHELOR, SPECIALTY
+}

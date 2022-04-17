@@ -6,13 +6,13 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @Setter
 @ToString
 public class RequestModel {
+    // TODO: custom Jackson for DateTime formats;
 
     @JsonProperty("firstname")
     private String firstName;
@@ -29,7 +29,7 @@ public class RequestModel {
 
     @JsonProperty("birthdate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate birthDate;
+    private String birthDate;
 
     @JsonProperty("experience-years")
     private double experience;

@@ -5,9 +5,9 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -16,13 +16,13 @@ public class ImagePDFService {
 
     private static final int PAGE_SIZE = 880;
 
-    public PDDocument addImageToCv(PDDocument document, MultipartFile file) throws IOException {
-        var image = Scalr.resize(ImageIO.read(file.getInputStream()), Scalr.Method.QUALITY,
+    public PDDocument addImageToCv(PDDocument document, Part fileInputStream) throws IOException {
+        var image = Scalr.resize(ImageIO.read(fileInputStream.getInputStream()), Scalr.Method.QUALITY,
                 Scalr.Mode.AUTOMATIC, 2500, Scalr.OP_ANTIALIAS);
 
         var byteArrayOutStream = new ByteArrayOutputStream();
         ImageIO.write(image, "jpg", byteArrayOutStream);
-        var imagePdf = PDImageXObject.createFromByteArray(document, byteArrayOutStream.toByteArray(), file.getName());
+        var imagePdf = PDImageXObject.createFromByteArray(document, byteArrayOutStream.toByteArray(), fileInputStream.getSubmittedFileName());
         var page = document.getPage(0);
         var height = image.getHeight() / 10;
         var width = image.getWidth() / 10;
