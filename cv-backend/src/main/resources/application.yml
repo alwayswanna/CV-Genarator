@@ -1,0 +1,11 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: cv-backend
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 101MB
+
