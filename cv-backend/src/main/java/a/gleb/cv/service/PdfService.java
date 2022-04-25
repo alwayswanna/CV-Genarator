@@ -5,7 +5,6 @@ import a.gleb.cv.model.exception.BadRequestException;
 import a.gleb.cv.model.exception.IllegalPageCoordinate;
 import a.gleb.cv.model.request.RequestModel;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.springframework.core.io.ByteArrayResource;
@@ -13,8 +12,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.Objects;
@@ -26,7 +25,7 @@ public record PdfService(ResponseGenService responseGenService,
                          CustomModelMapper customModelMapper) {
 
     @SneakyThrows
-    public ResponseEntity<Resource> generateCv(RequestModel model, MultipartFile file) {
+    public ResponseEntity<Resource> generateCv(RequestModel model, Part inputStreamFile) {
         var template = new File(Objects.requireNonNull(
                 getClass().getClassLoader().getResource("templates/template-cv.pdf")).getFile());
         PDDocument document = null;
@@ -34,7 +33,7 @@ public record PdfService(ResponseGenService responseGenService,
         try {
             document = PDDocument.load(template);
             // add image to cv;
-            document = imagePDFService.addImageToCv(document, file);
+            document = imagePDFService.addImageToCv(document, inputStreamFile);
             // add personal information to cv;
             document = personalDataPDFService.addPersonalInfoToCV(document, customModelMapper.map(model, model.getContactInfoModel()));
             // add personal skills to cv;

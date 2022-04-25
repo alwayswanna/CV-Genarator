@@ -88,7 +88,7 @@ public class PersonalDataPDFService {
             ));
         }
         if (StringUtils.isNotBlank(personalInfo.getGitlabLink())) {
-            addContacts(document, contentStream, 570, personalInfo.getGitlabLink(), new File(
+            addContacts(document, contentStream, 470, personalInfo.getGitlabLink(), new File(
                     Objects.requireNonNull(
                             getClass().getClassLoader().getResource("templates/icons/gitlab.png")).getFile()
             ));
