@@ -8,4 +8,4 @@
 - PDFBox
 
 ### cv-frontend:
-- ?
+- Flutter
